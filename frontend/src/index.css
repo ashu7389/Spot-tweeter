@@ -1,0 +1,589 @@
+:root {
+  --ink: #0f0f10;
+  --paper: #ffffff;
+  --line: #e4e4e7;
+  --muted: #6b6b70;
+  --accent: #5b3cf4;
+  --accent-soft: #efeaff;
+  --danger: #d9364a;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.app-shell {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.app-header .wordmark {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.app-header .session {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-header button {
+  border: 1px solid var(--line);
+  background: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* --- Auth --- */
+.auth-card {
+  max-width: 380px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.auth-card h1 {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  margin-bottom: 4px;
+}
+
+.auth-card p.sub {
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.auth-card input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.auth-card button.primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.auth-card button.primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.auth-card .switch {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.auth-card .switch button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin: -4px 0 12px;
+}
+
+/* --- Composer --- */
+.composer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.composer-body {
+  flex: 1;
+}
+
+.composer textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 18px;
+  font-family: inherit;
+  min-height: 60px;
+  outline: none;
+}
+
+.composer-preview {
+  position: relative;
+  margin: 8px 0;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.composer-preview img,
+.composer-preview video {
+  width: 100%;
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+}
+
+.composer-preview button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(15, 15, 16, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+}
+
+.composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.composer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.composer-actions label {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+.char-count {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.char-count.over {
+  color: var(--danger);
+}
+
+.composer button.post-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.composer button.post-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* --- Feed / Post card --- */
+.post-card {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.post-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-meta {
+  font-size: 14px;
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.post-meta .name {
+  font-weight: 700;
+}
+
+.post-meta .handle,
+.post-meta .dot,
+.post-meta .time {
+  color: var(--muted);
+}
+
+.post-text {
+  margin: 4px 0 8px;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.post-image {
+  width: 100%;
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+  display: block;
+  object-fit: cover;
+}
+
+.post-actions {
+  display: flex;
+  gap: 28px;
+  margin-top: 4px;
+}
+
+.post-actions button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+}
+
+.post-actions button.liked {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.post-actions button.delete:hover {
+  color: var(--danger);
+}
+
+.feed-empty,
+.feed-end,
+.feed-loading,
+.feed-error {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+.load-more {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 16px 20px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: none;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+/* --- Avatar image (overrides initials when the user has a photo) --- */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-lg {
+  width: 88px;
+  height: 88px;
+  font-size: 30px;
+}
+
+/* --- Header nav (wordmark / handle as buttons, no default button chrome) --- */
+.wordmark-btn,
+.handle-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.handle-link {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* --- Author name/handle as a clickable link inside a post --- */
+.author-link {
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+  font: inherit;
+  color: inherit;
+}
+
+.author-link:hover .name {
+  text-decoration: underline;
+}
+
+/* --- Profile page --- */
+.profile-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-name {
+  margin: 14px 0 0;
+  font-size: 22px;
+}
+
+.profile-handle {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.profile-bio {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.profile-meta-row {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.edit-profile-btn {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  background: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-posts-divider {
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* --- Edit profile form --- */
+.edit-profile-form {
+  margin-top: 14px;
+}
+
+.edit-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.edit-avatar-row button {
+  border: 1px solid var(--line);
+  background: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 12px 0 4px;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: none;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.edit-actions button.secondary {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+/* --- Profile: bio field row (location/age side by side) --- */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-row input {
+  margin-bottom: 0;
+}
+
+/* --- Profile: work done / current projects / generic sections --- */
+.profile-section {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-title {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+.section-title:not(:first-child) {
+  margin-top: 18px;
+}
+
+.entry-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.entry-list li {
+  margin-bottom: 4px;
+}
+
+/* --- Profile: photo/video gallery --- */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.media-grid-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+}
+
+/* --- Profile: recommendations --- */
+.recommendation-card {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.recommendation-card:first-of-type {
+  border-top: none;
+}
+
+.recommendation-avatar {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.recommendation-text {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.recommendation-form {
+  margin-top: 14px;
+}
+
+.recommendation-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  margin-bottom: 10px;
+}

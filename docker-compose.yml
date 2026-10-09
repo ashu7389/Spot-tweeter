@@ -1,0 +1,44 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: spotdada-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    image: spotdada-backend:latest
+    container_name: spotdada-backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/x-app
+      JWT_SECRET: 1080cb32c33d024bbcb82afe0f96f046a5ba7130d872066874298b5d060717e3
+      CLIENT_ORIGIN: ${CLIENT_ORIGIN:-http://localhost:8080}
+    volumes:
+      - uploads_data:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+    image: spotdada-frontend:latest
+    container_name: spotdada-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${APP_PORT:-8080}:80"
+
+volumes:
+  mongo_data:
+  uploads_data:
